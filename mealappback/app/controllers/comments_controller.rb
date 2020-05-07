@@ -9,15 +9,27 @@ class CommentsController < ApplicationController
 
     def create
       # byebug
-      @comment = Comment.create(comment_params)
+      like = params[:like]
+      user_id = params[:user][:id]
+      comment = params[:comment]
+      meal_id = params[:meal]
+   
+      @comment = Comment.create(like: like, user_id: user_id, comment: comment, meal_id: meal_id)
       render json: @comment
+    end
+
+    def update
+    end
+  
+    def destroy
+        @comment.destroy(comment_params)
     end
   
   
     private
   
     def comment_params
-      params.permit(:comment, :like, :user)
+      params.permit(:comment, :meal, :like, user: [:id, :username, :bio, :avatar, :password_digest])
     end
   
 

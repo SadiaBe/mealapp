@@ -13,6 +13,11 @@ class MealsController < ApplicationController
       @meals = @user.meals.create(meal_params)
       render json: @meals
     end
+
+
+    def destroy
+      @meal.destroy(meal_params)
+  end
   
   
     private
